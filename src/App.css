@@ -4,3 +4,8 @@
     align-items: center;
     justify-content: center;
 }
+
+.input{
+   justify-content: flex-end;
+    padding: 1.5rem 1.5rem
+}
