@@ -1,6 +1,6 @@
 import React from "react";
-import InputHandler from "./components/InputHandler";
 import MedConatainer from "./containers/MedContainer";
+import "./App.css";
 
 function App() {
   return (

@@ -6,6 +6,9 @@
 }
 
 .input{
-   justify-content: flex-end;
-    padding: 1.5rem 1.5rem
+   padding: 1rem 1rem;
+}
+.App-header{
+    display: flex;
+    justify-content: center;
 }

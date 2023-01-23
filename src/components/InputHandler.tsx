@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { SetStateAction, useState } from "react";
 import { AutoComplete } from "antd";
 import "../App.css";
+import Meds from "../utils/data.json";
 
-const mockVal = (str: string, repeat = 1) => ({
-  value: str.repeat(repeat),
-});
+const filterMeds = (str: string) => {
+  const newMock = Meds.filter((search) =>
+    search.name.toLocaleLowerCase().includes(str.toLocaleLowerCase())
+  );
+  const mapped = newMock.map((med) => med.name);
+  return mapped.map((med) => {
+    return { value: med };
+  });
+};
 type inputProp = {
-  onChange: () => void;
+  onChange: SetStateAction<string>;
   value: string;
 };
 
@@ -15,31 +22,25 @@ const InputHandler: React.FC<inputProp> = ({ onChange, value }: inputProp) => {
   const [options, setOptions] = useState<{ value: string }[]>([]);
 
   const onSearch = (searchText: string) => {
-    setOptions(
-      !searchText
-        ? []
-        : [mockVal(searchText), mockVal(searchText, 2), mockVal(searchText, 3)]
-    );
+    setOptions(!searchText ? [] : filterMeds(searchText));
   };
 
   const onSelect = (data: string) => {
     console.log("onSelect", data);
   };
 
-  //   const onChange = (data: string) => {
-  //     setValue(data);
-  //   };
-
   return (
     <div className="input">
       <AutoComplete
+        // dataSource={Meds}
+        allowClear
         value={value}
         options={options}
-        style={{ width: "100%" }}
+        style={{ width: "100%", marginBottom: "15px" }}
         onSelect={onSelect}
         onSearch={onSearch}
         onChange={onChange}
-        placeholder="control mode"
+        placeholder="search meds"
       />
     </div>
   );
