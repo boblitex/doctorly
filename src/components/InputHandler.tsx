@@ -5,9 +5,13 @@ import "../App.css";
 const mockVal = (str: string, repeat = 1) => ({
   value: str.repeat(repeat),
 });
+type inputProp = {
+  onChange: () => void;
+  value: string;
+};
 
-const InputHandler: React.FC = () => {
-  const [value, setValue] = useState("");
+const InputHandler: React.FC<inputProp> = ({ onChange, value }: inputProp) => {
+  //   const [value, setValue] = useState("");
   const [options, setOptions] = useState<{ value: string }[]>([]);
 
   const onSearch = (searchText: string) => {
@@ -22,9 +26,9 @@ const InputHandler: React.FC = () => {
     console.log("onSelect", data);
   };
 
-  const onChange = (data: string) => {
-    setValue(data);
-  };
+  //   const onChange = (data: string) => {
+  //     setValue(data);
+  //   };
 
   return (
     <div className="input">
